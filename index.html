@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifs App</title>
+</head>
+<body>
+    <form id="form" action="">
+        <input type="search" name="search" id="search">
+        <button type="submit">Search Gif</button>
+    </form>
+    <img src="#">
+    <script>
+        const form = document.getElementById("form")
+        form.addEventListener("submit",(event)=>{
+            event.preventDefault()
+            const search = document.getElementById("search")
+            let query = search.value
+            searchGif(query)
+        })
+        function searchGif(query) {
+            const img = document.querySelector('img');
+            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=O24TfXvVSBqB2k0Ln4785VEFNdsc2xMZ&s=${query}`,{mode:"cors"})
+            .then(function (response) {
+                return response.json()
+                }
+            ).then(function(response){
+                img.src=response.data.images.original.url
+            })
+        }
+    </script>
+</body>
+</html>
